@@ -10,7 +10,7 @@ const Welcome = () => {
   const titles = useRef([]);
   const loadingtext = useRef(null);
   const logo = useRef(null);
-  const text = SplitType.create(loadingtext.current, { type: "words" });
+  // const text = SplitType.create(loadingtext.current, { type: "words" });
   const [isLoading, setIsLoading] = useState(true);
 
   useGSAP(() => {
@@ -20,19 +20,22 @@ const Welcome = () => {
       },
     });
 
-    tl.from(text.words, {
-      y: -100,
+    tl.from(loadingtext.current, {
+      y: "-100%",
       opacity: 0,
-      stagger: 0.1,
       duration: 1.5,
       ease: "power4.out",
     })
-      .from(logo.current, {
-        opacity: 0,
-        scale: 0.5,
-        duration: 1.5,
-        ease: "power4.out",
-      })
+      .from(
+        logo.current,
+        {
+          opacity: 0,
+          scale: 0.5,
+          duration: 1.5,
+          ease: "power4.out",
+        },
+        "<1"
+      )
       .to(
         ".loading-overlay",
         {
@@ -40,7 +43,7 @@ const Welcome = () => {
           duration: 1.5,
           ease: "power4.in",
         },
-        ">0.3"
+        ">-0.5"
       )
       .to(
         titles.current,
@@ -51,7 +54,7 @@ const Welcome = () => {
           duration: 3,
           ease: "power4.out",
         },
-        ">0.5"
+        ">"
       );
   });
 

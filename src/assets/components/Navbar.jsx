@@ -15,7 +15,7 @@ const Navbar = () => {
       y: "-100%",
       duration: 1,
       ease: "power4.out",
-      delay: 7,
+      delay: 5,
     })
       .from(
         logo.current,

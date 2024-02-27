@@ -18,7 +18,7 @@ const Hero = () => {
     ScrollTrigger.create({
       trigger: section.current,
       start: "top 80%",
-      markers: true,
+      markers: false,
       animation: gsap
         .timeline()
         .from(title.current, {
