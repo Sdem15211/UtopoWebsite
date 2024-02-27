@@ -13,49 +13,54 @@ const Welcome = () => {
   const text = SplitType.create(loadingtext.current, { type: "words" });
   const [isLoading, setIsLoading] = useState(true);
 
-
   useGSAP(() => {
     const tl = gsap.timeline({
       onComplete: () => {
         setIsLoading(false);
-      }
+      },
     });
 
-    tl
-    .from(text.words, {
+    tl.from(text.words, {
+      y: -100,
       opacity: 0,
-      y: "100%",
       stagger: 0.1,
-      duration: 1,
-      ease: "back.out",
-      delay:0.5
-    })
-    .from(logo.current, {
-      opacity: 0,
-      scale: 0.5,
       duration: 1.5,
       ease: "power4.out",
     })
-    .to(".loading-overlay", {
-      y: -1600,
-      duration: 1.5,
-      ease: "power4.in",
-    }, ">0.5")
-    .to(titles.current, {
-      opacity: 1,
-      y: 0,
-      stagger: 0.5,
-      duration: 3,
-      ease: "power4.out",
-    }, ">0.5");
-    });
+      .from(logo.current, {
+        opacity: 0,
+        scale: 0.5,
+        duration: 1.5,
+        ease: "power4.out",
+      })
+      .to(
+        ".loading-overlay",
+        {
+          y: -1600,
+          duration: 1.5,
+          ease: "power4.in",
+        },
+        ">0.3"
+      )
+      .to(
+        titles.current,
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.5,
+          duration: 3,
+          ease: "power4.out",
+        },
+        ">0.5"
+      );
+  });
 
   useEffect(() => {
     // Disable scrolling while loading
     if (isLoading) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
   }, [isLoading]);
 
@@ -66,9 +71,23 @@ const Welcome = () => {
     >
       {isLoading && (
         <div className="loading-overlay fixed inset-0 bg-black opacity-100 z-50 flex justify-center items-center">
-          <p ref={loadingtext} className="absolute z-30 text-light-beige text-[3.375rem] font-satoshi font-bold top-56">Find Your Wave</p>
-          <img ref={logo} src={utopolightbeige} alt="utopo logo" className="h-[130px] w-auto object-fit z-30 translate-y-4" />
-          <img src={loadingImg} alt="surfing image" className="absolute top-0 left-0 z-20 brightness-[0.2] object-bottom" />
+          <p
+            ref={loadingtext}
+            className="absolute z-30 text-light-beige text-[3.375rem] font-satoshi font-bold top-56"
+          >
+            Find Your Wave
+          </p>
+          <img
+            ref={logo}
+            src={utopolightbeige}
+            alt="utopo logo"
+            className="h-[130px] w-auto object-fit z-30 translate-y-4"
+          />
+          <img
+            src={loadingImg}
+            alt="surfing image"
+            className="absolute top-0 left-0 z-20 brightness-[0.2] object-bottom"
+          />
         </div>
       )}
       <div className="mt-8 z-10 flex flex-col w-full items-center justify-center text-[7.6rem] gap-0">

@@ -2,7 +2,7 @@ import React from "react";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import  utopologonavy  from "../images/utoponavy.png";
+import utopologonavy from "../images/utoponavy.png";
 
 const Navbar = () => {
   const nav = useRef(null);
@@ -11,7 +11,12 @@ const Navbar = () => {
 
   useGSAP(() => {
     const tl = gsap.timeline();
-    tl.from(nav.current, { y: -100, duration: 1, ease: "power4.out", delay: 7})
+    tl.from(nav.current, {
+      y: "-100%",
+      duration: 1,
+      ease: "power4.out",
+      delay: 7,
+    })
       .from(
         logo.current,
         { opacity: 0, duration: 1.5, ease: "power4.out" },

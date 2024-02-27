@@ -14,9 +14,11 @@ const Hero = () => {
   const text = SplitType.create(title.current, { type: "chars" });
 
   useGSAP(() => {
+
     gsap.from(text.chars, {
       opacity: 0.2,
-      stagger: 0.1,
+      stagger:  0.1,
+      duration: 1.5,
       scrollTrigger: {
         trigger: section.current,
         start: "top 80%",
@@ -26,6 +28,7 @@ const Hero = () => {
         toggleActions: "play play reverse reverse",
       },
     });
+  
 
     ScrollTrigger.create({
       trigger: section.current,
