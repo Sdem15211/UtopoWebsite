@@ -11,40 +11,41 @@ const Hero = () => {
   const section = useRef(null);
   const body = useRef(null);
   const button = useRef(null);
-  const text = SplitType.create(title.current, { type: "chars" });
+  const img = useRef(null);
+  // const text = SplitType.create(title.current, { type: "chars" });
 
   useGSAP(() => {
-
-    gsap.from(text.chars, {
-      opacity: 0.2,
-      stagger:  0.1,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: section.current,
-        start: "top 80%",
-        end: "center 60%",
-        scrub: true,
-        markers: false,
-        toggleActions: "play play reverse reverse",
-      },
-    });
-  
-
     ScrollTrigger.create({
       trigger: section.current,
-      start: "top center",
+      start: "top 80%",
+      markers: true,
       animation: gsap
         .timeline()
-        .from(body.current, {
+        .from(title.current, {
           y: 100,
           opacity: 0,
           duration: 1.5,
-          ease: "power3.out",
+          ease: "power4.out",
         })
         .from(
+          body.current,
+          {
+            y: 100,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power4.out",
+          },
+          "<0.2"
+        )
+        .from(
           button.current,
-          { y: 100, opacity: 0, duration: 1.5, ease: "power3.out" },
-          0.2
+          { y: 100, opacity: 0, duration: 1.5, ease: "power4.out" },
+          "<0.2"
+        )
+        .from(
+          img.current,
+          { x: 100, opacity: 0, duration: 1.5, ease: "power4.out" },
+          "<0.2"
         ),
     });
   });
@@ -72,7 +73,10 @@ const Hero = () => {
             </span>
           </a>
         </div>
-        <div className="w-1/2 max-h-[650px] rounded-3xl shadow-xl overflow-hidden">
+        <div
+          ref={img}
+          className="w-1/2 max-h-[650px] rounded-3xl shadow-xl overflow-hidden"
+        >
           <img
             src={heroImg}
             alt="hero"
